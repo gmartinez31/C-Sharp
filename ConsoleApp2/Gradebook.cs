@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Grades
     {
         public Gradebook()
         {
+            _name = "Empty";
             grades = new List<float>();
         }
         public GradeStatistics ComputeStatistics()
@@ -39,6 +41,28 @@ namespace Grades
         {
             grades.Add(grade);
         }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                {
+                    if (_name != value)
+                    {
+                        NameChanged(_name, value);
+                    }
+                    _name = value;
+                }
+            }
+                   
+        }
+        public NameChangedDelegate NameChanged;
+
         private List<float> grades;
+        private string _name;
     }
 }
