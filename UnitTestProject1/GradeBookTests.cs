@@ -24,6 +24,23 @@ namespace Grades.Test
         }
 
         [TestMethod]
+        public void AddDaystoDateTime()
+        {
+            DateTime date = new DateTime(2018, 02, 20);
+            date = date.AddDays(1);
+            Assert.AreEqual(date.Day, 21);
+        }
+
+        [TestMethod]
+        public void UpperCaseString()
+        {
+            string name = "Gustavo";
+            string cap = name.ToUpper();
+
+            Assert.AreEqual("GUSTAVO", cap);
+        }
+
+        [TestMethod]
         public void ComputesLowestGrade()
         {
             Gradebook book = new Gradebook();
@@ -31,7 +48,7 @@ namespace Grades.Test
             book.AddGrade(90);
 
             GradeStatistics result = book.ComputeStatistics();
-            Assert.AreEqual(10, result.LowestGrade);
+            Assert.AreEqual(2, result.LowestGrade);
         }
     }
 }
