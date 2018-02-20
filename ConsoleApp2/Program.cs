@@ -17,7 +17,7 @@ namespace Grades
 
             Gradebook book = new Gradebook();
 
-            book.NameChanged = new NameChangedDelegate(OnNameChanged);
+            book.NameChanged += OnNameChanged;
 
             book.Name = "Goose's Gradebook";
             book.AddGrade(95);
@@ -32,9 +32,9 @@ namespace Grades
             WriteResult("Highest", stats.HighestGrade);
         }
 
-        static void OnNameChanged(string existingName, string newName)
+        static void OnNameChanged(object sender, NameChangedEventArgs args)
         {
-            Console.WriteLine($"Grade book changing name from {existingName} to {newName}");
+            Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
         }
 
         static void WriteResult(string description, float result)
