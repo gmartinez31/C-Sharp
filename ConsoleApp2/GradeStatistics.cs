@@ -14,31 +14,31 @@ namespace Grades
             LowestGrade = float.MaxValue;
         }
 
-        public string Description
-        {
-            get
-            {
-                string result;
-                switch (LetterGrade)
-                {
-                    case "A":
-                        result = "Excellent!";
-                        break;
-                    case "B":
-                        result = "Great!";
-                        break;
-                    case "C":
-                        result = "Decent.";
-                        break;
-                    case "D":
-                        result = "Try better next time.";
-                        break;
-                    default:
-                        result = "You failed miserably!";
-                        break;
-                }
-            }
-        }
+        //public string Description
+        //{
+        //    get
+        //    {
+        //        string result;
+        //        switch (LetterGrade)
+        //        {
+        //            case "A":
+        //                result = "Excellent!";
+        //                break;
+        //            case "B":
+        //                result = "Great!";
+        //                break;
+        //            case "C":
+        //                result = "Decent.";
+        //                break;
+        //            case "D":
+        //                result = "Try better next time.";
+        //                break;
+        //            default:
+        //                result = "You failed miserably!";
+        //                break;
+        //        }
+        //    }
+        //}
 
         public string LetterGrade
         {
@@ -49,7 +49,8 @@ namespace Grades
                 {
                     result = "A";
                 }
-                else if (AverageGrade >= 80){
+                else if (AverageGrade >= 80)
+                {
                     result = "B";
                 }
                 else if (AverageGrade >= 70)
