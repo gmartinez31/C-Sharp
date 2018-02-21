@@ -1,6 +1,7 @@
 ﻿using ConsoleApp2;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,15 @@ namespace Grades
 
             return stats;
         }
+
+        public void WriteGrades(StreamWriter destination)
+        {
+            for (int i = grades.Count; i > 0; i--)
+            {
+                destination.WriteLine(grades[i - 1]);
+            }
+        }
+
         public void AddGrade(float grade)
         {
             grades.Add(grade);
@@ -51,7 +61,7 @@ namespace Grades
             {
                 if (!String.IsNullOrEmpty(value))
                 {
-                    if (_name != value)
+                    if (_name != value && _name != null)
                     {
                         NameChangedEventArgs args = new NameChangedEventArgs();
                         args.ExistingName = _name;
@@ -62,7 +72,7 @@ namespace Grades
                     _name = value;
                 }
             }
-                   
+
         }
         public event NameChangedDelegate NameChanged;
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Speech.Synthesis;
 using ConsoleApp2;
+using System.IO;
 
 namespace Grades
 {
@@ -12,32 +13,61 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-            synth.Speak("Hello, World!");
+            SayHello();
 
             Gradebook book = new Gradebook();
+            GetBookName(book);
+            AddGrades(book);
+            OutputToNewFile(book);
 
+            GradeStatistics stats = book.ComputeStatistics();
+
+            WriteResult("Average", stats.AverageGrade);
+            WriteResult("Lowest", stats.LowestGrade);
+            WriteResult("Highest", stats.HighestGrade);
+            //WriteResult(stats.Description, stats.LetterGrade);
+        }
+
+        private static void AddGrades(Gradebook book)
+        {
+            book.AddGrade(95);
+            book.AddGrade(34);
+            book.AddGrade(98.3f);
+        }
+
+        private static void OutputToNewFile(Gradebook book)
+        {
+            StreamWriter outputFile = File.CreateText("grades.txt");
+            book.WriteGrades(outputFile);
+            outputFile.Close();
+
+            // or
+            //using(StreamWriter outputFile = File.CreateText("grades.txt"){
+            //    book.WriteGrades(outputFile);
+            //}
+        }
+
+        private static void SayHello()
+        {
+            SpeechSynthesizer synth = new SpeechSynthesizer();
+            synth.Speak("Hello, World!");
+        }
+
+        private static void GetBookName(Gradebook book)
+        {
             try
             {
                 Console.WriteLine("Enter your name: ");
                 book.Name = Console.ReadLine();
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-            book.AddGrade(95);
-            book.AddGrade(34);
-            book.AddGrade(98.3f);
-
-
-            GradeStatistics stats = book.ComputeStatistics();
-            
-            WriteResult("Average", stats.AverageGrade);
-            WriteResult("Lowest", stats.LowestGrade);
-            WriteResult("Highest", stats.HighestGrade);
-            //WriteResult(stats.Description, stats.LetterGrade);
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Something went wrong!");
+            }
         }
 
         static void WriteResult(string description, string result)
