@@ -1,5 +1,6 @@
 ﻿using ConsoleApp2;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Grades
             return stats;
         }
 
-        public override void WriteGrades(StreamWriter destination)
+        public override void WriteGrades(TextWriter destination)
         {
             for (int i = grades.Count; i > 0; i--)
             {
@@ -50,6 +51,11 @@ namespace Grades
         public override void AddGrade(float grade)
         {
             grades.Add(grade);
+        }
+
+        public override IEnumerator GetEnumerator()
+        {
+            return grades.GetEnumerator();
         }
         protected List<float> grades;
     }
