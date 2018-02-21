@@ -14,19 +14,19 @@ namespace Grades
         static void Main(string[] args)
         {
             SayHello();
-            Gradebook book = CreateGradeBook();
+            GradeTracker book = CreateGradeBook();
             GetBookName(book);
             AddGrades(book);
             OutputToNewFile(book);
             WriteResults(book);
         }
 
-        private static Gradebook CreateGradeBook()
+        private static GradeTracker CreateGradeBook()
         {
             return new ThrowAwayGradeBook();
         }
 
-        private static void WriteResults(Gradebook book)
+        private static void WriteResults(GradeTracker book)
         {
             GradeStatistics stats = book.ComputeStatistics();
             WriteResult("Average", stats.AverageGrade);
@@ -35,14 +35,14 @@ namespace Grades
             //WriteResult(stats.Description, stats.LetterGrade);
         }
 
-        private static void AddGrades(Gradebook book)
+        private static void AddGrades(GradeTracker book)
         {
             book.AddGrade(95);
             book.AddGrade(34);
             book.AddGrade(98.3f);
         }
 
-        private static void OutputToNewFile(Gradebook book)
+        private static void OutputToNewFile(GradeTracker book)
         {
             StreamWriter outputFile = File.CreateText("grades.txt");
             book.WriteGrades(outputFile);
@@ -60,7 +60,7 @@ namespace Grades
             synth.Speak("Hello, World!");
         }
 
-        private static void GetBookName(Gradebook book)
+        private static void GetBookName(GradeTracker book)
         {
             try
             {

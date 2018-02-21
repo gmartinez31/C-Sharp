@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Grades
 {   // the default standard for classes is internal. In order to run unit tests, we must specify public //
-    public class Gradebook
+    public class Gradebook : GradeTracker
     {
         public Gradebook()
         {
             _name = "Empty";
             grades = new List<float>();
         }
-        public virtual GradeStatistics ComputeStatistics()
+        public override GradeStatistics ComputeStatistics()
         {
             GradeStatistics stats = new GradeStatistics();
 
@@ -39,7 +39,7 @@ namespace Grades
             return stats;
         }
 
-        public void WriteGrades(StreamWriter destination)
+        public override void WriteGrades(StreamWriter destination)
         {
             for (int i = grades.Count; i > 0; i--)
             {
@@ -47,36 +47,10 @@ namespace Grades
             }
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             grades.Add(grade);
         }
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (!String.IsNullOrEmpty(value))
-                {
-                    if (_name != value && _name != null)
-                    {
-                        NameChangedEventArgs args = new NameChangedEventArgs();
-                        args.ExistingName = _name;
-                        args.NewName = value;
-
-                        NameChanged(this, args);
-                    }
-                    _name = value;
-                }
-            }
-
-        }
-        public event NameChangedDelegate NameChanged;
-
         protected List<float> grades;
-        private string _name;
     }
 }
