@@ -14,14 +14,21 @@ namespace Grades
         static void Main(string[] args)
         {
             SayHello();
-
-            Gradebook book = new Gradebook();
+            Gradebook book = CreateGradeBook();
             GetBookName(book);
             AddGrades(book);
             OutputToNewFile(book);
+            WriteResults(book);
+        }
 
+        private static Gradebook CreateGradeBook()
+        {
+            return new ThrowAwayGradeBook();
+        }
+
+        private static void WriteResults(Gradebook book)
+        {
             GradeStatistics stats = book.ComputeStatistics();
-
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Lowest", stats.LowestGrade);
             WriteResult("Highest", stats.HighestGrade);

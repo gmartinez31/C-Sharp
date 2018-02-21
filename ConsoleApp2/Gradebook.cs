@@ -15,7 +15,7 @@ namespace Grades
             _name = "Empty";
             grades = new List<float>();
         }
-        public GradeStatistics ComputeStatistics()
+        public virtual GradeStatistics ComputeStatistics()
         {
             GradeStatistics stats = new GradeStatistics();
 
@@ -76,7 +76,7 @@ namespace Grades
         }
         public event NameChangedDelegate NameChanged;
 
-        private List<float> grades;
+        protected List<float> grades;
         private string _name;
     }
 }
