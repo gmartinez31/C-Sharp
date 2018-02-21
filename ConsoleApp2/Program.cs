@@ -27,7 +27,7 @@ namespace Grades
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Lowest", stats.LowestGrade);
             WriteResult("Highest", stats.HighestGrade);
-            WriteResult("Grade", stats.LetterGrade);
+            WriteResult(stats.Description, stats.LetterGrade);
         }
 
         static void WriteResult(string description, string result)
